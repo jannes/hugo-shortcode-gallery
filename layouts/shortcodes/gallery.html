@@ -141,7 +141,7 @@ Ordinal: {{ .Ordinal}}
 					{{ $full = $original }}
 				{{ end }}
 				<a href="{{ $full.RelPermalink }}" 
-					class="galleryImg"
+                   class="{{ $galleryId }}"
 					{{ with $metadata }}
 						{{ if .Title }}
 							title="{{ .Title }}"
@@ -228,7 +228,7 @@ Ordinal: {{ .Ordinal}}
 				});
 			{{ end }}
 
-			swipeboxInstance = $('.galleryImg').swipebox(
+            swipeboxInstance = $('.{{ $galleryId }}').swipebox(
 				jQuery.extend({},
 					{ {{ $justifiedGalleryParameters | safeJS }} }
 				)
@@ -266,8 +266,8 @@ Ordinal: {{ .Ordinal}}
 					let include = filterFunction(meta);
 
 					// only those images visible in justified gallery should be displayed
-					// in swipebox (only <a> with class galleryImg are displayed in swipebox)
-					$(entry).find("a").toggleClass("galleryImg", include);
+					// in swipebox (only <a> with class $galleryId are displayed in swipebox)
+                    $(entry).find("a").toggleClass("{{ $galleryId }}", include);
 
 					return include;
 				}
